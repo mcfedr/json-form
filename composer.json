@@ -1,5 +1,5 @@
 {
-    "name": "mcfedr/json-forms",
+    "name": "mcfedr/json-form",
     "license": "MIT",
     "type": "library",
     "description": "A couple of helper files for handling json with symfony forms",
