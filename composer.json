@@ -1,0 +1,14 @@
+{
+    "name": "mcfedr/json-forms",
+    "license": "MIT",
+    "type": "library",
+    "description": "A couple of helper files for handling json with symfony forms",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.4",
+        "symfony/framework-bundle": "~2.5",
+        "symfony/form": "~2.5"
+    }
+}
