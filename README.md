@@ -11,7 +11,7 @@ Something like this.
         public function actionCreateAction(Request $request, $uuid) {
             $action = new Action();
             $form = $this->createForm(new ActionType(), $action);
-            $this->handleJsonForm($form, $request));
+            $this->handleJsonForm($form, $request);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($action);
