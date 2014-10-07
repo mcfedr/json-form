@@ -1,6 +1,6 @@
 <?php
 
-namespace mcfedr\Json\Exception;
+namespace Mcfedr\JsonForm\Exception;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

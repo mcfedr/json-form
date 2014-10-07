@@ -1,23 +1,23 @@
 <?php
 
-namespace mcfedr\Json\Controller;
+namespace Mcfedr\JsonForm\Controller;
 
-use mcfedr\Json\Exception\InvalidJsonHttpException;
-use mcfedr\Json\Exception\MissingFormHttpException;
-use mcfedr\Json\Exception\InvalidFormHttpException;
+use Mcfedr\JsonForm\Exception\InvalidJsonHttpException;
+use Mcfedr\JsonForm\Exception\MissingFormHttpException;
+use Mcfedr\JsonForm\Exception\InvalidFormHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class ApiController extends Controller
+abstract class JsonController extends Controller
 {
     /**
      * @param Form $form
      * @param Request $request
      * @param callable $preValidation callback to be called before the form is validated
-     * @throws \mcfedr\Json\Exception\InvalidFormHttpException
-     * @throws \mcfedr\Json\Exception\MissingFormHttpException
-     * @throws \mcfedr\Json\Exception\InvalidJsonHttpException
+     * @throws \Mcfedr\JsonForm\Exception\InvalidFormHttpException
+     * @throws \Mcfedr\JsonForm\Exception\MissingFormHttpException
+     * @throws \Mcfedr\JsonForm\Exception\InvalidJsonHttpException
      */
     protected function handleJsonForm(Form $form, Request $request, callable $preValidation = null)
     {
@@ -41,6 +41,9 @@ abstract class ApiController extends Controller
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createForm($type, $data = null, array $options = array())
     {
         if (!isset($options['csrf_protection'])) {
@@ -48,4 +51,15 @@ abstract class ApiController extends Controller
         }
         return parent::createForm($type, $data, $options);
     }
-} 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createFormBuilder($data = null, array $options = array())
+    {
+        if (!isset($options['csrf_protection'])) {
+            $options['csrf_protection'] = false;
+        }
+        return parent::createFormBuilder($data, $options);
+    }
+}
