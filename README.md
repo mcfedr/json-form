@@ -3,6 +3,12 @@
 Simply extend the `ApiController` and then use forms as you would normally, but they now expect to receive JSON.
 Something like this.
 
+[![Latest Stable Version](https://poser.pugx.org/mcfedr/json-form/v/stable.png)](https://packagist.org/packages/mcfedr/json-form)
+[![License](https://poser.pugx.org/mcfedr/json-form/license.png)](https://packagist.org/packages/mcfedr/json-form)
+[![Build Status](https://travis-ci.org/mcfedr/json-form.svg?branch=master)](https://travis-ci.org/mcfedr/json-form)
+
+## Example
+
     class ActionController extends ApiController
         /**
          * @Route("/actions/{uuid}", requirements={"uuid"="[a-z0-9-]{36}"})
