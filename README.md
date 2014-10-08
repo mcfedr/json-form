@@ -22,3 +22,9 @@ Something like this.
             ]);
         }
     }
+
+## Tests
+
+To run the tests
+
+    ./vendor/.bin/phpunit
