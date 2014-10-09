@@ -5,7 +5,7 @@ php:
     - 5.4
     - hhvm
 
-before_script: 
+before_script:
     - composer selfupdate
-    - composer install
+    - composer install --prefer-source
 script: ./vendor/bin/phpunit
