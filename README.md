@@ -33,4 +33,4 @@ Something like this.
 
 To run the tests
 
-    ./vendor/.bin/phpunit
+    ./vendor/bin/phpunit
