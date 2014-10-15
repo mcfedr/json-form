@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="name-of-project" default="build">
+<project name="json-form" default="build">
  <!-- By default, we assume all tools to be on the $PATH -->
- <property name="toolsdir" value=""/>
+ <property name="toolsdir" value="${basedir}/vendor/bin/"/>
 
  <!-- Uncomment the following when the tools are in ${basedir}/vendor/bin -->
  <!-- <property name="toolsdir" value="${basedir}/vendor/bin/"/> -->

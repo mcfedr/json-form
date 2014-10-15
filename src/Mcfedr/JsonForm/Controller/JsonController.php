@@ -46,9 +46,7 @@ abstract class JsonController extends Controller
      */
     public function createForm($type, $data = null, array $options = array())
     {
-        if (!isset($options['csrf_protection'])) {
-            $options['csrf_protection'] = false;
-        }
+        $this->checkCsrf($options);
         return parent::createForm($type, $data, $options);
     }
 
@@ -57,9 +55,13 @@ abstract class JsonController extends Controller
      */
     public function createFormBuilder($data = null, array $options = array())
     {
-        if (!isset($options['csrf_protection'])) {
+        $this->checkCsrf($options);
+        return parent::createFormBuilder($data, $options);
+    }
+
+    private function checkCsrf($options) {
+        if (array_key_exists('csrf_protection', $options) && $this->container->getParameter('form.type_extension.csrf.enabled')) {
             $options['csrf_protection'] = false;
         }
-        return parent::createFormBuilder($data, $options);
     }
 }
