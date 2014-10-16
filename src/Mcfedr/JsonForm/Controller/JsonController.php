@@ -59,8 +59,8 @@ abstract class JsonController extends Controller
         return parent::createFormBuilder($data, $options);
     }
 
-    private function checkCsrf($options) {
-        if (array_key_exists('csrf_protection', $options) && $this->container->getParameter('form.type_extension.csrf.enabled')) {
+    private function checkCsrf(&$options) {
+        if (!array_key_exists('csrf_protection', $options) && $this->container->getParameter('form.type_extension.csrf.enabled')) {
             $options['csrf_protection'] = false;
         }
     }
