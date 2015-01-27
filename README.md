@@ -7,6 +7,35 @@ Something like this.
 [![License](https://poser.pugx.org/mcfedr/json-form/license.png)](https://packagist.org/packages/mcfedr/json-form)
 [![Build Status](https://travis-ci.org/mcfedr/json-form.svg?branch=master)](https://travis-ci.org/mcfedr/json-form)
 
+## JSON
+
+The expected JSON will be just like that form values that would be sent.
+
+Suppose you have the following form type
+
+    class AccountType extends AbstractType
+    {
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder
+                ->add('name');
+        }
+    
+        public function getName()
+        {
+            return 'account';
+        }
+    }
+
+Then the JSON should be
+
+    {
+        "account": {
+            "name": "Fred"
+        }
+    }
+    
+
 ## Example
 
     class ActionController extends ApiController

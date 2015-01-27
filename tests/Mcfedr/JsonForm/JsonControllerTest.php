@@ -6,28 +6,84 @@
 namespace Mcfedr\JsonForm;
 
 use Mcfedr\JsonForm\Controller\JsonController;
+use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Validation;
 
 class JsonControllerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testHandleForm()
-    {
-        /** @var JsonController $controller */
-        $controller = $this->getMockForAbstractClass('Mcfedr\JsonForm\Controller\JsonController');
-        $form = Forms::createFormFactory()->createBuilder()
-            ->add('one', 'text')
-            ->getForm();
+    /**
+     * @var JsonController
+     */
+    private $controller;
 
+    /**
+     * @var Form
+     */
+    private $form;
+
+    public function setUp()
+    {
+        $this->controller = $this->getMockForAbstractClass('Mcfedr\JsonForm\Controller\JsonController');
+        $validator = Validation::createValidator();
+        $this->form = Forms::createFormFactoryBuilder()
+            ->addExtension(new ValidatorExtension($validator))
+            ->getFormFactory()
+            ->createBuilder()
+            ->add('one', 'choice', [
+                'choices' => ['value' => 'value']
+            ])
+            ->getForm();
+    }
+
+    public function testHandleJsonForm()
+    {
         $request = new Request([], [], [], [], [], [], json_encode([
             'form' => [
-                'one' => 'hi'
+                'one' => 'value'
             ]
         ]));
 
-        $this->invokeMethod($controller, 'handleJsonForm', [$form, $request]);
+        $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
 
-        $this->assertEquals($form->getData()['one'], 'hi');
+        $this->assertEquals($this->form->getData()['one'], 'value');
+    }
+
+    /**
+     * @expectedException Mcfedr\JsonForm\Exception\InvalidJsonHttpException
+     */
+    public function testHandleJsonFormInvalid()
+    {
+        $request = new Request([], [], [], [], [], [], 'some non json text');
+
+        $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
+    }
+
+    /**
+     * @expectedException Mcfedr\JsonForm\Exception\MissingFormHttpException
+     */
+    public function testHandleJsonFormMissing()
+    {
+        $request = new Request([], [], [], [], [], [], json_encode(['wrong' => 'data']));
+
+        $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
+    }
+
+    /**
+     * @expectedException Mcfedr\JsonForm\Exception\InvalidFormHttpException
+     */
+    public function testHandleJsonFormInvalidData()
+    {
+        $request = new Request([], [], [], [], [], [], json_encode([
+            'form' => [
+                'one' => 'other'
+            ]
+        ]));
+
+        $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
     }
 
     /**

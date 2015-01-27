@@ -2,19 +2,12 @@
 
 namespace Mcfedr\JsonForm\Exception;
 
-use Symfony\Component\HttpKernel\Exception\HttpException;
-
-class InvalidJsonHttpException extends HttpException
+class InvalidJsonHttpException extends JsonHttpException
 {
     public function __construct()
     {
-        parent::__construct(
-            400,
-            json_encode(['error' => 'Invalid JSON']),
-            null,
-            [
-                'Content-Type' => 'application/json'
-            ]
-        );
+        parent::__construct(400, [
+            'error' => 'Invalid JSON'
+        ]);
     }
 }

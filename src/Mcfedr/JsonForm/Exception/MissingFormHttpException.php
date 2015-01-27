@@ -3,19 +3,13 @@
 namespace Mcfedr\JsonForm\Exception;
 
 use Symfony\Component\Form\Form;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class MissingFormHttpException extends HttpException
+class MissingFormHttpException extends JsonHttpException
 {
     public function __construct(Form $form)
     {
-        parent::__construct(
-            400,
-            json_encode(['error' => 'Missing ' . $form->getName()]),
-            null,
-            [
-                'Content-Type' => 'application/json'
-            ]
-        );
+        parent::__construct(400, [
+            'error' => 'Missing ' . $form->getName()
+        ]);
     }
 }

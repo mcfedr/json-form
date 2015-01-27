@@ -5,25 +5,15 @@ namespace Mcfedr\JsonForm\Exception;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class InvalidFormHttpException extends HttpException
+class InvalidFormHttpException extends JsonHttpException
 {
     public function __construct(Form $form)
     {
-        parent::__construct(
-            400,
-            json_encode(
-                [
-                    'error' => 'Invalid data',
-                    'errorInfo' => $this->getAllErrors($form)
-                ]
-            ),
-            null,
-            [
-                'Content-Type' => 'application/json'
-            ]
-        );
+        parent::__construct(400, [
+            'error' => 'Invalid data',
+            'errorInfo' => $this->getAllErrors($form)
+        ]);
     }
 
     /**
