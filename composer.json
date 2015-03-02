@@ -22,7 +22,6 @@
         "symfony/symfony": "~2.3"
     },
     "require-dev": {
-        "symfony/validator": "~2.5",
         "phpunit/phpunit": "~4.3",
         "theseer/phpdox": "~0.7",
         "phploc/phploc": "~2.0",

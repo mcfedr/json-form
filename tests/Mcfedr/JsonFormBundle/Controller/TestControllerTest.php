@@ -18,5 +18,9 @@ class TestControllerTest extends WebTestCase
 
         $this->assertInternalType('array', $data);
         $this->assertCount(1, $data);
+        $this->assertInternalType('array', $data['error']);
+        $this->assertCount(2, $data['error']);
+        $this->assertEquals(400, $data['error']['code']);
+        $this->assertEquals('Invalid JSON', $data['error']['message']);
     }
 }

@@ -14,7 +14,7 @@ class ExceptionListener
 
         if ($exception instanceof JsonHttpException) {
             $data = $exception->getData();
-            $response = new JsonResponse(array_merge(['error' => $exception->getMessage()], $data ? ['errorInfo' => $exception->getData()] : []));
+            $response = new JsonResponse(['error' => array_merge(['code'=> $exception->getStatusCode(), 'message' => $exception->getMessage()], $data ? ['info' => $exception->getData()] : [])]);
             $event->setResponse($response);
         }
     }
