@@ -6,9 +6,8 @@ use Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException;
 use Mcfedr\JsonFormBundle\Type\TestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Forms;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TestController extends JsonController
 {
@@ -32,6 +31,6 @@ class TestController extends JsonController
         $form = $this->createForm(new TestType());
         $this->handleJsonForm($form, $request);
 
-        return new Response();
+        return new JsonResponse($form->getData());
     }
 }

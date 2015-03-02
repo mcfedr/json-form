@@ -12,7 +12,8 @@ class TestType extends AbstractType
         $builder
             ->add('one', 'choice', [
                 'choices' => ['value' => 'value']
-            ]);
+            ])
+            ->add('two', 'checkbox');
     }
 
     /**

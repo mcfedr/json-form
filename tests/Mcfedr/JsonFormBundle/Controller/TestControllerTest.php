@@ -29,11 +29,44 @@ class TestControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
-                'one' => 'value'
+                'one' => 'value',
+                'two' => false
             ]
         ]));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testFormActionCheckbox()
+    {
+        $client = static::createClient();
+        $client->request('POST', '/form', [], [], [], json_encode([
+            'form' => [
+                'one' => 'value'
+            ]
+        ]));
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertFalse($data['two']);
+
+        $client = static::createClient();
+        $client->request('POST', '/form', [], [], [], json_encode([
+            'form' => [
+                'one' => 'value',
+                'two' => true
+            ]
+        ]));
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertTrue($data['two']);
+
+        $client = static::createClient();
+        $client->request('POST', '/form', [], [], [], json_encode([
+            'form' => [
+                'one' => 'value',
+                'two' => false
+            ]
+        ]));
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertFalse($data['two']);
     }
 
     public function testFormInvalidAction()
@@ -42,7 +75,8 @@ class TestControllerTest extends WebTestCase
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
                 'one' => 'value',
-                'two' => 'value'
+                'two' => true,
+                'three' => 'value'
             ]
         ]));
 
