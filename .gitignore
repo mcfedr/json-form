@@ -1,3 +1,5 @@
 /vendor/
 /build/
 cache.properties
+/tests/cache/
+/tests/logs/

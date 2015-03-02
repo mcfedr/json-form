@@ -1,0 +1,5 @@
+services:
+    mcfedr_json_form.exception_listener:
+        class: Mcfedr\JsonFormBundle\EventListener\ExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="vendor/autoload.php" colors="true">
+<phpunit bootstrap="tests/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Json Forms">
-            <directory>tests/Mcfedr/JsonForm/</directory>
+            <directory>tests/Mcfedr/JsonFormBundle/</directory>
         </testsuite>
     </testsuites>
 
@@ -15,9 +15,13 @@
         <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
     </logging>
 
+    <php>
+        <server name="KERNEL_DIR" value="tests/" />
+    </php>
+
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Mcfedr/JsonForm/</directory>
+            <directory suffix=".php">src/Mcfedr/JsonFormbundle/</directory>
         </whitelist>
     </filter>
 </phpunit>

@@ -9,18 +9,17 @@
             "email": "mcfedr@gmail.com"
         }
     ],
-    "type": "library",
+    "type": "symfony-bundle",
     "minimum-stability": "stable",
     "autoload": {
-        "psr-0": { "Mcfedr\\JsonForm": "src/" }
+        "psr-0": { "Mcfedr\\JsonFormBundle": "src/" }
     },
     "autoload-dev": {
-        "psr-0": { "Mcfedr\\JsonForm": "test/" }
+        "psr-0": { "Mcfedr\\JsonFormBundle": "tests/" }
     },
     "require": {
         "php": ">=5.4",
-        "symfony/framework-bundle": "~2.5",
-        "symfony/form": "~2.5"
+        "symfony/symfony": "~2.3"
     },
     "require-dev": {
         "symfony/validator": "~2.5",
@@ -30,6 +29,8 @@
         "pdepend/pdepend": "~2.0",
         "phpmd/phpmd": "~2.1",
         "squizlabs/php_codesniffer": "~1.5",
-        "sebastian/phpcpd": "~2.0"
+        "sebastian/phpcpd": "~2.0",
+        "symfony/monolog-bundle": "~2.3",
+        "sensio/framework-extra-bundle": "~3.0"
     }
 }

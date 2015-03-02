@@ -1,0 +1,4 @@
+mcfedr_json_form:
+    resource: "Mcfedr/JsonFormBundle/Controller/TestController.php"
+    type:     annotation
+    prefix:   /

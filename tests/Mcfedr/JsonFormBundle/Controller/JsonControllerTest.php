@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by mcfedr on 07/10/14 22:57
- */
 
-namespace Mcfedr\JsonForm;
+namespace Mcfedr\JsonFormBundle\Controller;
 
-use Mcfedr\JsonForm\Controller\JsonController;
+use Mcfedr\JsonFormBundle\Controller\JsonController;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\Forms;
@@ -27,7 +24,7 @@ class JsonControllerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->controller = $this->getMockForAbstractClass('Mcfedr\JsonForm\Controller\JsonController');
+        $this->controller = $this->getMockForAbstractClass('Mcfedr\JsonFormBundle\Controller\JsonController');
         $validator = Validation::createValidator();
         $this->form = Forms::createFormFactoryBuilder()
             ->addExtension(new ValidatorExtension($validator))
@@ -53,7 +50,7 @@ class JsonControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Mcfedr\JsonForm\Exception\InvalidJsonHttpException
+     * @expectedException \Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException
      */
     public function testHandleJsonFormInvalid()
     {
@@ -63,7 +60,7 @@ class JsonControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Mcfedr\JsonForm\Exception\MissingFormHttpException
+     * @expectedException \Mcfedr\JsonFormBundle\Exception\MissingFormHttpException
      */
     public function testHandleJsonFormMissing()
     {
@@ -73,7 +70,7 @@ class JsonControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Mcfedr\JsonForm\Exception\InvalidFormHttpException
+     * @expectedException \Mcfedr\JsonFormBundle\Exception\InvalidFormHttpException
      */
     public function testHandleJsonFormInvalidData()
     {

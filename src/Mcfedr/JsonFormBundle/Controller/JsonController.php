@@ -1,10 +1,10 @@
 <?php
 
-namespace Mcfedr\JsonForm\Controller;
+namespace Mcfedr\JsonFormBundle\Controller;
 
-use Mcfedr\JsonForm\Exception\InvalidJsonHttpException;
-use Mcfedr\JsonForm\Exception\MissingFormHttpException;
-use Mcfedr\JsonForm\Exception\InvalidFormHttpException;
+use Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException;
+use Mcfedr\JsonFormBundle\Exception\MissingFormHttpException;
+use Mcfedr\JsonFormBundle\Exception\InvalidFormHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,9 @@ abstract class JsonController extends Controller
      * @param Form $form
      * @param Request $request
      * @param callable $preValidation callback to be called before the form is validated
-     * @throws \Mcfedr\JsonForm\Exception\InvalidFormHttpException
-     * @throws \Mcfedr\JsonForm\Exception\MissingFormHttpException
-     * @throws \Mcfedr\JsonForm\Exception\InvalidJsonHttpException
+     * @throws \Mcfedr\JsonFormBundle\Exception\InvalidFormHttpException
+     * @throws \Mcfedr\JsonFormBundle\Exception\MissingFormHttpException
+     * @throws \Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException
      */
     protected function handleJsonForm(Form $form, Request $request, callable $preValidation = null)
     {
