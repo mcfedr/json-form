@@ -6,6 +6,7 @@ Something like this.
 [![Latest Stable Version](https://poser.pugx.org/mcfedr/json-form/v/stable.png)](https://packagist.org/packages/mcfedr/json-form)
 [![License](https://poser.pugx.org/mcfedr/json-form/license.png)](https://packagist.org/packages/mcfedr/json-form)
 [![Build Status](https://travis-ci.org/mcfedr/json-form.svg?branch=master)](https://travis-ci.org/mcfedr/json-form)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/86c5d646-c3d8-444f-b27c-6bf3a2a727a0/mini.png)](https://insight.sensiolabs.com/projects/86c5d646-c3d8-444f-b27c-6bf3a2a727a0)
 
 ## Install
 
