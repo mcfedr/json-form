@@ -12,10 +12,10 @@
     "type": "symfony-bundle",
     "minimum-stability": "stable",
     "autoload": {
-        "psr-0": { "Mcfedr\\JsonFormBundle": "src/" }
+        "psr-4": { "Mcfedr\\JsonFormBundle\\": "src/Mcfedr/JsonFormBundle" }
     },
     "autoload-dev": {
-        "psr-0": { "Mcfedr\\JsonFormBundle": "tests/" }
+        "psr-4": { "Mcfedr\\JsonFormBundle\\": "tests/Mcfedr/JsonFormBundle" }
     },
     "require": {
         "php": ">=5.4",
