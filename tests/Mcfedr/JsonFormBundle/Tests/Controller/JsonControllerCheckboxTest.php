@@ -1,6 +1,6 @@
 <?php
 
-namespace Mcfedr\JsonFormBundle\Controller;
+namespace Mcfedr\JsonFormBundle\Tests\Controller;
 
 use Mcfedr\JsonFormBundle\Controller\JsonController;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;

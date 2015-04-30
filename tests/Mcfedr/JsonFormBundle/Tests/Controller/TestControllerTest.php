@@ -1,6 +1,6 @@
 <?php
 
-namespace Mcfedr\JsonFormBundle\Controller;
+namespace Mcfedr\JsonFormBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
