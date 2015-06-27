@@ -21,7 +21,7 @@ Include the bundle in your AppKernel
     {
         $bundles = array(
             ...
-            new Mcfedr\JsonFormBundle\JsonFormBundle()
+            new Mcfedr\JsonFormBundle\McfedrJsonFormBundle()
 
 ## JSON
 
