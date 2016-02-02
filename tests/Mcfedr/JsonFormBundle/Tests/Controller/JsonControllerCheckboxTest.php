@@ -3,6 +3,7 @@
 namespace Mcfedr\JsonFormBundle\Tests\Controller;
 
 use Mcfedr\JsonFormBundle\Controller\JsonController;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\Forms;
@@ -30,7 +31,7 @@ class JsonControllerCheckboxTest extends \PHPUnit_Framework_TestCase
             ->addExtension(new ValidatorExtension($validator))
             ->getFormFactory()
             ->createBuilder()
-            ->add('one', 'checkbox')
+            ->add('one', CheckboxType::class)
             ->getForm();
     }
 

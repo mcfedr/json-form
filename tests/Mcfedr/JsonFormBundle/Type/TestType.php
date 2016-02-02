@@ -3,6 +3,8 @@
 namespace Mcfedr\JsonFormBundle\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class TestType extends AbstractType
@@ -10,10 +12,10 @@ class TestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('one', 'choice', [
+            ->add('one', ChoiceType::class, [
                 'choices' => ['value' => 'value']
             ])
-            ->add('two', 'checkbox');
+            ->add('two', CheckboxType::class);
     }
 
     /**
@@ -21,7 +23,7 @@ class TestType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'form';
     }
