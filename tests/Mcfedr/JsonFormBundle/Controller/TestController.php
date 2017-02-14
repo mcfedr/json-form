@@ -6,8 +6,8 @@ use Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException;
 use Mcfedr\JsonFormBundle\Type\TestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class TestController extends JsonController
 {

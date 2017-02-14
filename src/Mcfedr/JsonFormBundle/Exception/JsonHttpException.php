@@ -9,9 +9,9 @@ abstract class JsonHttpException extends HttpException
     private $data;
 
     /**
-     * @param int $statusCode
+     * @param int    $statusCode
      * @param string $message
-     * @param mixed $data
+     * @param mixed  $data
      */
     public function __construct($statusCode, $message = null, $data = null)
     {

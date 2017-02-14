@@ -15,6 +15,7 @@ class InvalidFormHttpException extends JsonHttpException
 
     /**
      * @param FormInterface $form
+     *
      * @return \Symfony\Component\Form\FormError[]
      */
     protected function getAllErrors(FormInterface $form)
