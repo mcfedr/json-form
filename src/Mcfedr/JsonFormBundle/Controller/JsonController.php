@@ -31,7 +31,7 @@ abstract class JsonController extends Controller
             throw new MissingFormHttpException($form);
         }
 
-        $form->submit($body[$form->getName()]);
+        $form->submit($body[$form->getName()], !$request->isMethod('PUT'));
 
         if ($preValidation) {
             $preValidation();
