@@ -26,7 +26,7 @@ class TestController extends JsonController
      */
     public function formAction(Request $request)
     {
-        $form = $this->createForm(TestType::class);
+        $form = $this->createJsonForm(TestType::class);
         $this->handleJsonForm($form, $request);
 
         return new JsonResponse($form->getData());

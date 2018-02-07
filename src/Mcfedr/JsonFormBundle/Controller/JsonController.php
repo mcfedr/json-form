@@ -42,14 +42,14 @@ abstract class JsonController extends Controller
         }
     }
 
-    public function createForm($type, $data = null, array $options = [])
+    public function createJsonForm($type, $data = null, array $options = [])
     {
         $this->checkCsrf($options);
 
         return parent::createForm($type, $data, $options);
     }
 
-    public function createFormBuilder($data = null, array $options = [])
+    public function createJsonFormBuilder($data = null, array $options = [])
     {
         $this->checkCsrf($options);
 

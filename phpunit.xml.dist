@@ -9,11 +9,12 @@
 
     <php>
         <server name="KERNEL_DIR" value="tests/" />
+        <server name="KERNEL_CLASS" value="TestKernel" />
     </php>
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Mcfedr/JsonFormbundle/</directory>
+            <directory suffix=".php">src/Mcfedr/JsonFormBundle/</directory>
         </whitelist>
     </filter>
 </phpunit>
