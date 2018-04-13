@@ -61,7 +61,7 @@ Then the JSON should be
          */
         public function actionCreateAction(Request $request, $uuid) {
             $action = new Action();
-            $form = $this->createJsonForm(new ActionType(), $action);
+            $form = $this->createJsonForm(ActionType::class, $action);
             $this->handleJsonForm($form, $request);
 
             $em = $this->getDoctrine()->getManager();
