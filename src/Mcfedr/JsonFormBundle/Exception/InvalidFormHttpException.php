@@ -75,7 +75,9 @@ class InvalidFormHttpException extends JsonHttpException
         $err = [];
         foreach ($recursive as $key => $value) {
             if ('errors' === $key && count($value) > 0) {
-                $err[] = $value[0]['message'];
+                foreach ($value as $error) {
+                    $err[] = $error['message'];
+                }
             }
         }
 
