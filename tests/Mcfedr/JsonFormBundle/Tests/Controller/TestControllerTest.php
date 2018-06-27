@@ -76,7 +76,8 @@ class TestControllerTest extends WebTestCase
             'form' => [
                 'one' => 'value',
                 'two' => true,
-                'three' => 'value'
+                'three' => 'value',
+                'number' => 'string'
             ]
         ]));
 
@@ -90,7 +91,7 @@ class TestControllerTest extends WebTestCase
         $this->assertInternalType('array', $data['error']);
         $this->assertCount(3, $data['error']);
         $this->assertEquals(400, $data['error']['code']);
-        $this->assertEquals('Invalid data', $data['error']['message']);
+        $this->assertEquals('This form should not contain extra fields. This value is not valid.', $data['error']['message']);
         $this->assertInternalType('array', $data['error']['info']);
     }
 }
