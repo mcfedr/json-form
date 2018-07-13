@@ -1,6 +1,4 @@
 services:
     Mcfedr\JsonFormBundle\EventListener\ExceptionListener:
-        arguments:
-            - "@logger"
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
