@@ -1,3 +1,6 @@
+## 4.4.0
+- Change to using FormInterface instead of Form
+
 ## 4.3.0
 - Don't log json errors, ends up double logging because the resulting http exception is still logged
 
