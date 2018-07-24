@@ -4,13 +4,12 @@ namespace Mcfedr\JsonFormBundle\Exception;
 
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 
 class InvalidFormHttpException extends JsonHttpException
 {
-    public function __construct(Form $form)
+    public function __construct(FormInterface $form)
     {
         $data = $this->getAllErrors($form);
         parent::__construct(400, implode(' ', $this->simpleError($data)), $data);

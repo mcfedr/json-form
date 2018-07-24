@@ -8,6 +8,7 @@ use Mcfedr\JsonFormBundle\Exception\MissingFormHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,15 +17,15 @@ use Symfony\Component\HttpFoundation\Request;
 trait JsonControllerTrait
 {
     /**
-     * @param Form     $form
-     * @param Request  $request
-     * @param callable $preValidation callback to be called before the form is validated
+     * @param FormInterface $form
+     * @param Request       $request
+     * @param callable      $preValidation callback to be called before the form is validated
      *
      * @throws \Mcfedr\JsonFormBundle\Exception\InvalidFormHttpException
      * @throws \Mcfedr\JsonFormBundle\Exception\MissingFormHttpException
      * @throws \Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException
      */
-    protected function handleJsonForm(Form $form, Request $request, callable $preValidation = null)
+    protected function handleJsonForm(FormInterface $form, Request $request, callable $preValidation = null)
     {
         $bodyJson = $request->getContent();
         if (!($body = json_decode($bodyJson, true))) {

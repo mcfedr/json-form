@@ -2,11 +2,11 @@
 
 namespace Mcfedr\JsonFormBundle\Exception;
 
-use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 
 class MissingFormHttpException extends JsonHttpException
 {
-    public function __construct(Form $form)
+    public function __construct(FormInterface $form)
     {
         parent::__construct(400, 'Missing ' . $form->getName());
     }
