@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mcfedr\JsonFormBundle\Exception;
 
 class InvalidJsonHttpException extends JsonHttpException

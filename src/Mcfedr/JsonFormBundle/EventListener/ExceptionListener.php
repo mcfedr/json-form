@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mcfedr\JsonFormBundle\EventListener;
 
 use Mcfedr\JsonFormBundle\Exception\JsonHttpException;
@@ -8,7 +10,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ExceptionListener
 {
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
 
@@ -16,8 +18,8 @@ class ExceptionListener
             $errorData = [
                 'error' => [
                     'code' => $exception->getStatusCode(),
-                    'message' => $exception->getMessage()
-                ]
+                    'message' => $exception->getMessage(),
+                ],
             ];
             if (($data = $exception->getData())) {
                 $errorData['error']['info'] = $data;

@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 class TestKernel extends Symfony\Component\HttpKernel\Kernel
 {
@@ -7,14 +8,13 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Mcfedr\JsonFormBundle\McfedrJsonFormBundle()
+            new Mcfedr\JsonFormBundle\McfedrJsonFormBundle(),
         ];
     }
 
-    public function registerContainerConfiguration(\Symfony\Component\Config\Loader\LoaderInterface $loader)
+    public function registerContainerConfiguration(Symfony\Component\Config\Loader\LoaderInterface $loader): void
     {
-        $loader->load(__DIR__ . '/config_test.yml');
+        $loader->load(__DIR__.'/config_test.yml');
     }
 }

@@ -1,0 +1,19 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+#    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+parameters:
+#    symfony:
+#        container_xml_path: %rootDir%/../../../var/cache/test/testsTestKernelTestDebugContainer.xml
+#        console_application_loader: %rootDir%/../../../tests/console_application_loader.php
+    level: 1
+    paths:
+        - src/
+        - tests/
+    excludes_analyse:
+        - tests/cache/
+    ignoreErrors:
+        -
+            message: '#Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters#'
+            path: %rootDir%/../../../src/Mcfedr/QueueManagerBundle/DependencyInjection/Configuration.php
+    reportUnmatchedIgnoredErrors: false

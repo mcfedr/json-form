@@ -1,75 +1,80 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mcfedr\JsonFormBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class TestControllerTest extends WebTestCase
+/**
+ * @internal
+ */
+final class TestControllerTest extends WebTestCase
 {
-    public function testInvalidAction()
+    public function testInvalidAction(): void
     {
         $client = static::createClient();
         $client->request('GET', '/invalid');
 
-        $this->assertEquals(400, $client->getResponse()->getStatusCode());
-        $this->assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
+        static::assertEquals(400, $client->getResponse()->getStatusCode());
+        static::assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
 
         $data = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertInternalType('array', $data);
-        $this->assertCount(1, $data);
-        $this->assertInternalType('array', $data['error']);
-        $this->assertCount(2, $data['error']);
-        $this->assertEquals(400, $data['error']['code']);
-        $this->assertEquals('Invalid JSON', $data['error']['message']);
+        static::assertIsArray($data);
+        static::assertCount(1, $data);
+        static::assertIsArray($data['error']);
+        static::assertCount(2, $data['error']);
+        static::assertEquals(400, $data['error']['code']);
+        static::assertEquals('Invalid JSON', $data['error']['message']);
     }
 
-    public function testFormAction()
+    public function testFormAction(): void
     {
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
                 'one' => 'value',
-                'two' => false
-            ]
+                'two' => false,
+            ],
         ]));
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        static::assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testFormActionCheckbox()
+    public function testFormActionCheckbox(): void
     {
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
-                'one' => 'value'
-            ]
+                'one' => 'value',
+            ],
         ]));
         $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertFalse($data['two']);
+        static::assertFalse($data['two']);
 
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
                 'one' => 'value',
-                'two' => true
-            ]
+                'two' => true,
+            ],
         ]));
         $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertTrue($data['two']);
+        static::assertTrue($data['two']);
 
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
                 'one' => 'value',
-                'two' => false
-            ]
+                'two' => false,
+            ],
         ]));
         $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertFalse($data['two']);
+        static::assertFalse($data['two']);
     }
 
-    public function testFormInvalidAction()
+    public function testFormInvalidAction(): void
     {
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
@@ -77,46 +82,46 @@ class TestControllerTest extends WebTestCase
                 'one' => 'value',
                 'two' => true,
                 'three' => 'value',
-                'number' => 'string'
-            ]
+                'number' => 'string',
+            ],
         ]));
 
-        $this->assertEquals(400, $client->getResponse()->getStatusCode());
-        $this->assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
+        static::assertEquals(400, $client->getResponse()->getStatusCode());
+        static::assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
 
         $data = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertInternalType('array', $data);
-        $this->assertCount(1, $data);
-        $this->assertInternalType('array', $data['error']);
-        $this->assertCount(3, $data['error']);
-        $this->assertEquals(400, $data['error']['code']);
-        $this->assertEquals('This form should not contain extra fields. This value is not valid.', $data['error']['message']);
-        $this->assertInternalType('array', $data['error']['info']);
+        static::assertIsArray($data);
+        static::assertCount(1, $data);
+        static::assertIsArray($data['error']);
+        static::assertCount(3, $data['error']);
+        static::assertEquals(400, $data['error']['code']);
+        static::assertEquals('This form should not contain extra fields. This value is not valid.', $data['error']['message']);
+        static::assertIsArray($data['error']['info']);
     }
 
-    public function testFormErrorMessageAction()
+    public function testFormErrorMessageAction(): void
     {
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
                 'one' => 'value',
                 'two' => true,
-                'email' => 'test'
-            ]
+                'email' => 'test',
+            ],
         ]));
 
-        $this->assertEquals(400, $client->getResponse()->getStatusCode());
-        $this->assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
+        static::assertEquals(400, $client->getResponse()->getStatusCode());
+        static::assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
 
         $data = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertInternalType('array', $data);
-        $this->assertCount(1, $data);
-        $this->assertInternalType('array', $data['error']);
-        $this->assertCount(3, $data['error']);
-        $this->assertEquals(400, $data['error']['code']);
-        $this->assertEquals('This value is not a valid email address.', $data['error']['message']);
-        $this->assertInternalType('array', $data['error']['info']);
+        static::assertIsArray($data);
+        static::assertCount(1, $data);
+        static::assertIsArray($data['error']);
+        static::assertCount(3, $data['error']);
+        static::assertEquals(400, $data['error']['code']);
+        static::assertEquals('This value is not a valid email address.', $data['error']['message']);
+        static::assertIsArray($data['error']['info']);
     }
 }

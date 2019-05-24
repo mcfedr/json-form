@@ -13,3 +13,10 @@ monolog:
     handlers:
         main:
             type: console
+
+services:
+    Mcfedr\JsonFormBundle\Controller\:
+        resource: 'Mcfedr/JsonFormBundle/Controller/*'
+        autowire: true
+        autoconfigure: true
+        public: false
