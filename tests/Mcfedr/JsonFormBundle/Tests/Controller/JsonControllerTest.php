@@ -1,8 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mcfedr\JsonFormBundle\Tests\Controller;
 
 use Mcfedr\JsonFormBundle\Controller\JsonController;
+use Mcfedr\JsonFormBundle\Exception\InvalidFormHttpException;
+use Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException;
+use Mcfedr\JsonFormBundle\Exception\MissingFormHttpException;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Form;
@@ -10,10 +17,13 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validation;
 
-class JsonControllerTest extends \PHPUnit_Framework_TestCase
+/**
+ * @internal
+ */
+final class JsonControllerTest extends TestCase
 {
     /**
-     * @var JsonController
+     * @var MockObject^JsonController
      */
     private $controller;
 
@@ -22,62 +32,57 @@ class JsonControllerTest extends \PHPUnit_Framework_TestCase
      */
     private $form;
 
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->controller = $this->getMockForAbstractClass('Mcfedr\JsonFormBundle\Controller\JsonController');
+        $this->controller = $this->getMockBuilder(JsonController::class)->getMock();
         $validator = Validation::createValidator();
         $this->form = Forms::createFormFactoryBuilder()
             ->addExtension(new ValidatorExtension($validator))
             ->getFormFactory()
             ->createBuilder()
             ->add('one', ChoiceType::class, [
-                'choices' => ['value' => 'value']
+                'choices' => ['value' => 'value'],
             ])
-            ->getForm();
+            ->getForm()
+        ;
     }
 
-    public function testHandleJsonForm()
+    public function testHandleJsonForm(): void
     {
         $request = new Request([], [], [], [], [], [], json_encode([
             'form' => [
-                'one' => 'value'
-            ]
+                'one' => 'value',
+            ],
         ]));
 
         $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
 
-        $this->assertEquals($this->form->getData()['one'], 'value');
+        static::assertEquals($this->form->getData()['one'], 'value');
     }
 
-    /**
-     * @expectedException \Mcfedr\JsonFormBundle\Exception\InvalidJsonHttpException
-     */
-    public function testHandleJsonFormInvalid()
+    public function testHandleJsonFormInvalid(): void
     {
+        $this->expectException(InvalidJsonHttpException::class);
         $request = new Request([], [], [], [], [], [], 'some non json text');
 
         $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
     }
 
-    /**
-     * @expectedException \Mcfedr\JsonFormBundle\Exception\MissingFormHttpException
-     */
-    public function testHandleJsonFormMissing()
+    public function testHandleJsonFormMissing(): void
     {
+        $this->expectException(MissingFormHttpException::class);
         $request = new Request([], [], [], [], [], [], json_encode(['wrong' => 'data']));
 
         $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
     }
 
-    /**
-     * @expectedException \Mcfedr\JsonFormBundle\Exception\InvalidFormHttpException
-     */
-    public function testHandleJsonFormInvalidData()
+    public function testHandleJsonFormInvalidData(): void
     {
+        $this->expectException(InvalidFormHttpException::class);
         $request = new Request([], [], [], [], [], [], json_encode([
             'form' => [
-                'one' => 'other'
-            ]
+                'one' => 'other',
+            ],
         ]));
 
         $this->invokeMethod($this->controller, 'handleJsonForm', [$this->form, $request]);
@@ -94,7 +99,7 @@ class JsonControllerTest extends \PHPUnit_Framework_TestCase
      */
     private function invokeMethod($object, $methodName, array $parameters = [])
     {
-        $reflection = new \ReflectionClass(get_class($object));
+        $reflection = new \ReflectionClass(\get_class($object));
         $method = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 

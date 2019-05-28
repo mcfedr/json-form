@@ -1,27 +1,31 @@
 # Json Form helper
 
-Simply extend the `JsonController` and then use forms as you would normally, but they now expect to receive JSON.
-Something like this.
+Simply use the `JsonControllerTrait` and then use forms as you would normally,
+but they now expect to receive JSON.
 
 [![Latest Stable Version](https://poser.pugx.org/mcfedr/json-form/v/stable.png)](https://packagist.org/packages/mcfedr/json-form)
 [![License](https://poser.pugx.org/mcfedr/json-form/license.png)](https://packagist.org/packages/mcfedr/json-form)
 [![Build Status](https://travis-ci.org/mcfedr/json-form.svg?branch=master)](https://travis-ci.org/mcfedr/json-form)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/86c5d646-c3d8-444f-b27c-6bf3a2a727a0/mini.png)](https://insight.sensiolabs.com/projects/86c5d646-c3d8-444f-b27c-6bf3a2a727a0)
 
 ## Install
 
 ### Composer
 
-    php composer.phar require mcfedr/json-form
+```bash
+php composer.phar require mcfedr/json-form
+```
+
 ### AppKernel
 
 Include the bundle in your AppKernel
 
-    public function registerBundles()
-    {
-        $bundles = array(
-            ...
-            new Mcfedr\JsonFormBundle\McfedrJsonFormBundle()
+```php
+public function registerBundles()
+{
+    $bundles = array(
+        ...
+        new Mcfedr\JsonFormBundle\McfedrJsonFormBundle()
+```
 
 ## JSON
 
@@ -29,53 +33,66 @@ The expected JSON will be just like that form values that would be sent.
 
 Suppose you have the following form type
 
-    class AccountType extends AbstractType
+```php
+class AccountType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        public function buildForm(FormBuilderInterface $builder, array $options)
-        {
-            $builder
-                ->add('name');
-        }
-    
-        public function getName()
-        {
-            return 'account';
-        }
+        $builder
+            ->add('name');
     }
+
+    public function getBlockPrefix()
+    {
+        return 'account';
+    }
+}
+```
 
 Then the JSON should be
 
-    {
-        "account": {
-            "name": "Fred"
-        }
+```json
+{
+    "account": {
+        "name": "Fred"
     }
-    
+}
+```
 
 ## Example
 
-    class ActionController extends JsonController
-        /**
-         * @Route("/actions/{uuid}", requirements={"uuid"="[a-z0-9-]{36}"})
-         * @Method("POST")
-         */
-        public function actionCreateAction(Request $request, $uuid) {
-            $action = new Action();
-            $form = $this->createJsonForm(ActionType::class, $action);
-            $this->handleJsonForm($form, $request);
+```php
+class AccountController extends AbstractController
+    use JsonControllerTrait;
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($action);
-            $em->flush();
+    /**
+     * @Route("/accounts", methods={"POST"})
+     */
+    public function accountCreateAction(Request $request, $uuid) {
+        $account = new Account();
+        $form = $this->createJsonForm(AccountType::class, $account);
+        $this->handleJsonForm($form, $request);
 
-            return new JsonResponse([
-                'action' => $action
-            ]);
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($account);
+        $em->flush();
+
+        return $this->json([
+            'account' => $account
+        ]);
     }
+}
+```
 
-## Tests
+For Symfony 3.x you will need to extend `Controller` because the trait needs
+access to `getParameter` method.
+
+## Contributing
 
 To run the tests
 
-    ./vendor/bin/phpunit
+```bash
+./vendor/bin/php-cs-fixer fix
+./vendor/bin/phpunit
+./vendor/bin/phpstan analyse
+```

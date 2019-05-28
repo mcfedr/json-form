@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="tests/bootstrap.php" colors="true">
+<!-- http://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit colors="true" bootstrap="vendor/autoload.php">
+
     <testsuites>
-        <testsuite name="Json Forms">
-            <directory>tests/Mcfedr/JsonFormBundle/</directory>
+        <testsuite name="Project Test Suite">
+            <directory>tests/*/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
     <php>
-        <server name="KERNEL_DIR" value="tests/" />
+        <server name="KERNEL_DIR" value="tests" />
         <server name="KERNEL_CLASS" value="TestKernel" />
     </php>
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Mcfedr/JsonFormBundle/</directory>
+            <directory>src</directory>
+            <exclude>
+                <directory>src/*/*Bundle/Resources</directory>
+            </exclude>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
 </phpunit>
