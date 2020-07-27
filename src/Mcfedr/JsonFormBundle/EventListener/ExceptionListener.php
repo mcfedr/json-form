@@ -6,13 +6,13 @@ namespace Mcfedr\JsonFormBundle\EventListener;
 
 use Mcfedr\JsonFormBundle\Exception\JsonHttpException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 class ExceptionListener
 {
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
 
         if ($exception instanceof JsonHttpException) {
             $errorData = [

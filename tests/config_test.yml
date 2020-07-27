@@ -3,7 +3,7 @@ framework:
     session:
         storage_id: session.storage.mock_file
     router:
-        resource: "%kernel.root_dir%/routing.yml"
+        resource: "%kernel.project_dir%/tests/routing.yml"
         strict_requirements: ~
     validation:      { enable_annotations: true }
     secret: 'fake_secret'
@@ -19,4 +19,4 @@ services:
         resource: 'Mcfedr/JsonFormBundle/Controller/*'
         autowire: true
         autoconfigure: true
-        public: false
+        public: true

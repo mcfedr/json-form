@@ -11,6 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 final class TestControllerTest extends WebTestCase
 {
+    protected function setUp(): void
+    {
+        static::ensureKernelShutdown();
+        parent::setUp();
+    }
+
     public function testInvalidAction(): void
     {
         $client = static::createClient();
@@ -53,6 +59,7 @@ final class TestControllerTest extends WebTestCase
         $data = json_decode($client->getResponse()->getContent(), true);
         static::assertFalse($data['two']);
 
+        static::ensureKernelShutdown();
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
@@ -63,6 +70,7 @@ final class TestControllerTest extends WebTestCase
         $data = json_decode($client->getResponse()->getContent(), true);
         static::assertTrue($data['two']);
 
+        static::ensureKernelShutdown();
         $client = static::createClient();
         $client->request('POST', '/form', [], [], [], json_encode([
             'form' => [
