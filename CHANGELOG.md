@@ -1,3 +1,9 @@
+## 4.7.0
+
+- Drop Symfony 3.x
+- Add Symfony 5.x
+- Undeprecate the JsonController
+
 ## 4.6.0
 - Drop support for php less than 7.2
 - Add strict_types
