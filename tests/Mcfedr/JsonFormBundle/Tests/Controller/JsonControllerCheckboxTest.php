@@ -31,7 +31,7 @@ final class JsonControllerCheckboxTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->controller = $this->getMockBuilder(JsonController::class)->getMock();
+        $this->controller = $this->getMockBuilder(JsonController::class)->disableOriginalConstructor()->getMock();
         $validator = Validation::createValidator();
         $this->form = Forms::createFormFactoryBuilder()
             ->addExtension(new ValidatorExtension($validator))
