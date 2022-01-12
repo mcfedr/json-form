@@ -1,6 +1,6 @@
 /vendor/
 /tests/cache/
 /tests/logs/
-/.php_cs.cache
 /var
 /.phpunit.result.cache
+/.php-cs-fixer.cache

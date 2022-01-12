@@ -18,6 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 trait JsonControllerTrait
 {
+    /**
+     * @param null|mixed $data
+     *
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     public function createJsonForm(string $type, $data = null, array $options = []): FormInterface
     {
         $this->checkCsrf($options);
@@ -25,6 +31,12 @@ trait JsonControllerTrait
         return $this->container->get('form.factory')->create($type, $data, $options);
     }
 
+    /**
+     * @param null|mixed $data
+     *
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     public function createJsonFormBuilder($data = null, array $options = []): FormBuilderInterface
     {
         $this->checkCsrf($options);
@@ -68,9 +80,13 @@ trait JsonControllerTrait
         }
     }
 
-    private function jsonControllerGetParameter(string $name)
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    private function jsonControllerGetParameter(string $name): mixed
     {
-        // If the controller isnt registered as a service, the container will
+        // If the controller isn't registered as a service, the container will
         // be the full Container, as was default in 3.0
         if ($this->container->has('parameter_bag')) {
             return $this->container->get('parameter_bag')->get($name);

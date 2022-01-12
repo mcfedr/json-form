@@ -11,7 +11,7 @@ abstract class JsonHttpException extends HttpException
     /**
      * @var null|mixed
      */
-    private $data;
+    private mixed $data;
 
     /**
      * @param int        $statusCode

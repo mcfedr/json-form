@@ -77,7 +77,7 @@ final class JsonControllerCheckboxTest extends TestCase
      *
      * @return mixed method return
      */
-    private function invokeMethod($object, $methodName, array $parameters = [])
+    private function invokeMethod($object, $methodName, array $parameters = []): mixed
     {
         $reflection = new \ReflectionClass(\get_class($object));
         $method = $reflection->getMethod($methodName);
