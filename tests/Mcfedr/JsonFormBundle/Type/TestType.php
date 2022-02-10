@@ -21,7 +21,7 @@ class TestType extends AbstractType
                 'choices' => ['value' => 'value'],
             ])
             ->add('two', CheckboxType::class)
-            ->add('number', NumberType::class)
+            ->add('number', NumberType::class, ['invalid_message' => 'Please enter a number.'])
             ->add('email', EmailType::class, [
                 'constraints' => new Email(),
             ])
