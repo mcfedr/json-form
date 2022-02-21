@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class TestKernel extends Symfony\Component\HttpKernel\Kernel
 {
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),

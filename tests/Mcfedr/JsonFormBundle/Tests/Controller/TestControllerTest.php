@@ -104,7 +104,7 @@ final class TestControllerTest extends WebTestCase
         static::assertIsArray($data['error']);
         static::assertCount(3, $data['error']);
         static::assertEquals(400, $data['error']['code']);
-        static::assertEquals('This form should not contain extra fields. This value is not valid.', $data['error']['message']);
+        static::assertEquals('This form should not contain extra fields. Please enter a number.', $data['error']['message']);
         static::assertIsArray($data['error']['info']);
     }
 

@@ -3,7 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->in(['src', 'tests']);
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
